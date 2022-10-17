@@ -1,9 +1,12 @@
-/**
- * omit - creates an object composed of enumerable property fields
- * @param {object} obj - the source object
- * @param {...string} fields - the properties paths to omit
- * @returns {object} - returns the new object
- */
 export const omit = (obj, ...fields) => {
+  return Object.entries(obj)
+    .filter((item) => {
+      return ![...fields].includes(item[0]);
+    })
 
+    .reduce((result, cur) => {
+      result[cur[0]] = cur[cur[0]];
+      result[cur[0]] = cur[1];
+      return result;
+    }, {});
 };
