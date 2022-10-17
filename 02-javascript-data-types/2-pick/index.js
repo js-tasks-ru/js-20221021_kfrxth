@@ -1,9 +1,17 @@
-/**
- * pick - Creates an object composed of the picked object properties:
- * @param {object} obj - the source object
- * @param {...string} fields - the properties paths to pick
- * @returns {object} - returns the new object
- */
-export const pick = (obj, ...fields) => {
+ export const pick = (obj, ...fields) => {
+	const masArgs = [...fields];
+	const mas = Object.entries(obj);
+	let filtredMas = mas.filter(item => {
+		return masArgs.includes(item[0])
+	})
 
+	let resultObj = filtredMas.reduce((result, cur) => {
+		let key = cur[0];
+		let value = cur[1];
+		result[key] = cur[key];
+		result[key] = value
+		return result;
+	}, {})
+
+	return resultObj;
 };
