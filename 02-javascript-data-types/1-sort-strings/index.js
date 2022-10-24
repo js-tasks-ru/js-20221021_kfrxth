@@ -2,7 +2,11 @@ export function sortStrings(arr, param = "asc") {
   let sortedNewArr = arr
     .map((el) => el)
     .sort((a, b) => {
-      return a.localeCompare(b);
+      if (param == "asc") {
+        return a.localeCompare(b);
+      } else {
+        return b.localeCompare(a);
+      }
     })
 
     .sort((a, b) => {
@@ -11,5 +15,5 @@ export function sortStrings(arr, param = "asc") {
       }
     });
 
-  return param == "asc" ? sortedNewArr : sortedNewArr.reverse();
+  return sortedNewArr;
 }
