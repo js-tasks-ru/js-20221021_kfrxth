@@ -1,19 +1,12 @@
 export function sortStrings(arr, param = "asc") {
-  let sortedNewArr = arr
-    .map((el) => el)
+   const sortedNewArr = [...arr]
     .sort((a, b) => {
-      if (param == "asc") {
-        return a.localeCompare(b);
+      if (param === "asc") {
+        return a.localeCompare(b, ['ru', 'en'], {caseFirst: 'upper'});
       } else {
-        return b.localeCompare(a);
+        return b.localeCompare(a, ['ru', 'en'],{caseFirst: 'upper'});
       }
     })
-
-    .sort((a, b) => {
-      if (a[0].toLowerCase() == b[0].toLowerCase()) {
-        return a[0].charCodeAt() - b[0].charCodeAt();
-      }
-    });
 
   return sortedNewArr;
 }
