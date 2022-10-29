@@ -1,14 +1,15 @@
 export function uniq(arr) {
+  const setUniq = new Set();
   let result = [];
-  if (typeof arr == "undefined") {
+
+  if (!arr) {
     return result;
   }
 
-  arr.map((item) => {
-    if (!result.includes(item)) {
-      result.push(item);
-    }
+  arr.forEach((element) => {
+    setUniq.add(element);
   });
-
+  result = [...setUniq];
+  
   return result;
 }
