@@ -1,11 +1,17 @@
 export function createGetter(path) {
-  return (fnc = (obj) => {
-    return path.split(".").reduce((sum, curr) => {
-      if (sum === null) {
-        return obj[curr];
-      }
+  let masPath = path.split(".");
 
-      return Object.keys(obj).length == 0 ? undefined : sum[curr];
-    }, null);
-  });
+  return (obj) => {
+    let result = obj;
+
+    if (result === undefined) {
+      return result;
+    }
+
+    for (let i = 0; i < masPath.length; i++) {
+      result = result[masPath[i]];
+    }
+
+    return result;
+  };
 }
