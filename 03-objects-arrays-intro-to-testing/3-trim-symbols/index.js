@@ -1,6 +1,7 @@
 export function trimSymbols(string, size) {
   let countSameWord = 0;
   let result = "";
+  let splitString = [...string];
 
   if (string.length === 0 || size === 0) {
     return result;
@@ -10,13 +11,13 @@ export function trimSymbols(string, size) {
     return string;
   }
 
-  for (let [index, word] of Object.entries(string)) {
+  for (const [index, word] of Object.entries(splitString)) {
 	if (countSameWord < size){
 		result += word;
 		countSameWord++;
 	}
 
-	if (string[+index + 1] !== word){
+	if (splitString[Number(index) + 1] !== word){
 		countSameWord = 0;
 	}
   }

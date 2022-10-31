@@ -1,5 +1,5 @@
 export function createGetter(path) {
-  let masPath = path.split(".");
+  const masPath = path.split(".");
 
   return (obj) => {
     let result = obj;
@@ -8,9 +8,12 @@ export function createGetter(path) {
       return result;
     }
 
-    for (let i = 0; i < masPath.length; i++) {
-      result = result[masPath[i]];
-    }
+	for (const item of masPath){
+		if (result === undefined){
+			break;
+		}
+		result = result[item];
+	}
 
     return result;
   };
