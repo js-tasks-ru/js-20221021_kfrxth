@@ -1,18 +1,13 @@
-export function sortStrings(arr, param = 'asc') {
-	const compareElems = (a, b) => {
-		return a.localeCompare(b, ['ru', 'en'], {caseFirst: 'upper'})
-	}
+export function sortStrings(arr = [], param = 'asc') {
+  const directions = {
+    asc: 1,
+    desc: -1
+  };
+  const direction = directions[param];
 
-   const sortedNewArr = [...arr]
-    .sort((a, b) => {
-      if (param === 'asc') {
-        return compareElems(a, b);
-      }
-	 if (param === 'desc') 
-	  {
-        return compareElems(b, a);
-      }
-    })
-
-  return sortedNewArr;
+  return makeSorting(arr, direction);
 }
+
+function makeSorting(array, direction) {
+  return [...array].sort((string1, string2) =>
+    direction * string1.localeCompare(string2, ['ru', 'en'], {caseFirst: 'upper'}));

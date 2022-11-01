@@ -1,20 +1,17 @@
-export function createGetter(path) {
-  const masPath = path.split(".");
+export const createGetter = path => {
+  const pathArray = path.split('.');
 
-  return (obj) => {
+  return obj => {
     let result = obj;
 
-    if (result === undefined) {
-      return result;
-    }
+    for (const item of pathArray) {
+      if (result === undefined) {
+        break;
+      }
 
-	for (const item of masPath){
-		if (result === undefined){
-			break;
-		}
-		result = result[item];
-	}
+      result = result[item];
+    }
 
     return result;
   };
-}
+};
