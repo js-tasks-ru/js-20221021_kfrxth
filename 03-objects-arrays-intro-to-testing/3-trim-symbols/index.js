@@ -1,9 +1,26 @@
-/**
- * trimSymbols - removes consecutive identical symbols if they quantity bigger that size
- * @param {string} string - the initial string
- * @param {number} size - the allowed size of consecutive identical symbols
- * @returns {string} - the new string without extra symbols according passed size
- */
 export function trimSymbols(string, size) {
+  let countSameWord = 0;
+  let result = "";
+  let splitString = [...string];
 
+  if (string.length === 0 || size === 0) {
+    return result;
+  }
+
+  if (typeof size === "undefined") {
+    return string;
+  }
+
+  for (const [index, word] of Object.entries(splitString)) {
+	if (countSameWord < size){
+		result += word;
+		countSameWord++;
+	}
+
+	if (splitString[Number(index) + 1] !== word){
+		countSameWord = 0;
+	}
+  }
+
+  return result;
 }
