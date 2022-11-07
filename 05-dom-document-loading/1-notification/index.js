@@ -1,6 +1,7 @@
 export default class NotificationMessage {
   element;
-  timeForElement;
+  static notificationElement;
+
   constructor(
     textNotification = "",
     { duration = 1000, type = "success" } = {}
@@ -18,12 +19,15 @@ export default class NotificationMessage {
 
     element.innerHTML = this.template();
 
-    if (!document.querySelector(`.notification`)) {
-      document.body.append(element);
-      this.timeForElement = setTimeout(() => element.remove(), this.duration);
+    if (NotificationMessage.notificationElement) {
+      NotificationMessage.notificationElement.remove();
     }
 
+    document.body.append(element);
+    setTimeout(() => element.remove(), this.duration);
+
     this.element = element.firstElementChild;
+    NotificationMessage.notificationElement = this.element;
   }
 
   template() {
@@ -39,8 +43,9 @@ export default class NotificationMessage {
   </div>`;
   }
 
-  show(div) {
+  show(div = "") {
     this.render();
+
     if (div) {
       this.element = div;
     }
